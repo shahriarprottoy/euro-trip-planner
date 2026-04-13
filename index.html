@@ -9,37 +9,36 @@
 <body>
     <header>
         <h1>Europe Trip Suggester</h1>
-        <p>Find your perfect destination based on your pocket and passions.</p>
+        <p>Discover where your budget can take you.</p>
     </header>
 
     <main>
-        <section class="filter-section">
+        <div class="card-panel">
             <div class="input-group">
                 <label>Total Budget (€)</label>
                 <input type="number" id="budget" placeholder="e.g. 1000">
             </div>
             <div class="input-group">
-                <label>Days to Stay</label>
+                <label>Duration (Days)</label>
                 <input type="number" id="days" placeholder="e.g. 7">
             </div>
             <div class="input-group">
-                <label>Preference</label>
+                <label>Vibe</label>
                 <select id="preference">
                     <option value="any">Surprise Me</option>
                     <option value="history">History</option>
-                    <option value="nature">Nature</option>
                     <option value="nightlife">Nightlife</option>
-                    <option value="art">Art</option>
+                    <option value="food">Food</option>
+                    <option value="nature">Nature</option>
+                    <option value="budget">Budget Friendly</option>
                 </select>
             </div>
-            <button id="search-btn">Find My Trip</button>
-        </section>
+            <button id="search-btn">Search Destinations</button>
+        </div>
 
-        <section id="results-container" class="results-grid">
-            <p class="placeholder-text">Enter your details to see suggestions...</p>
-        </section>
+        <div id="results-container" class="results-grid">
+            </div>
     </main>
-
     <script src="app.js"></script>
 </body>
 </html>
