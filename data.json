@@ -8,22 +8,13 @@
     "image": "https://images.unsplash.com/photo-1551840231-b5ef0e840450?auto=format&fit=crop&w=400"
   },
   {
-    "city": "Paris",
-    "country": "France",
-    "daily_cost": 150,
-    "tags": ["art", "history", "romantic"],
-    "activities": ["Louvre Museum", "Eiffel Tower Picnic", "Montmartre Walk"],
-    "image": "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=400"
-  },
-  {
     "city": "Interlaken",
     "country": "Switzerland",
     "daily_cost": 200,
     "tags": ["nature", "adventure"],
     "activities": ["Paragliding", "Lake Brienz", "Harder Kulm View"],
     "image": "https://images.unsplash.com/photo-1527668752968-14dc70a274dd?auto=format&fit=crop&w=400"
-  }
-  
+  },
   {
     "city": "Vienna",
     "country": "Austria",
