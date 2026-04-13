@@ -12,7 +12,8 @@ document.getElementById('search-btn').addEventListener('click', async () => {
 
     // 2. Fetch Data (Asynchronous Communication)
     try {
-        const response = await fetch('data.json');
+        
+        const response = await fetch('http://localhost:3000/api/destinations');
         const destinations = await response.json();
 
         // 3. Logic: Calculate Daily Limit
