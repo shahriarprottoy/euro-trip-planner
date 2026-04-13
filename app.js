@@ -4,54 +4,53 @@ document.getElementById('search-btn').addEventListener('click', async () => {
     const preference = document.getElementById('preference').value;
     const container = document.getElementById('results-container');
 
-    // 1. Basic Validation
     if (!budget || !days) {
-        alert("Please enter both budget and duration!");
+        alert("Please enter budget and days.");
         return;
     }
 
-    // 2. Fetch Data (Asynchronous Communication)
+    // ARCHITECTURE: Checking if we are local or on GitHub
+    const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+    const API_URL = isLocal ? 'http://localhost:3000/api/destinations' : 'data.json';
+
     try {
-        
-        const response = await fetch('http://localhost:3000/api/destinations');
-        const destinations = await response.json();
+        const response = await fetch(API_URL);
+        const data = await response.json();
 
-        // 3. Logic: Calculate Daily Limit
-        const dailyLimit = budget / days;
+        const dailyBudget = budget / days;
 
-        // 4. Logic: Filter and Score
-        const filtered = destinations.filter(item => {
-            const isAffordable = item.daily_cost <= dailyLimit;
-            const matchesPref = preference === 'any' || item.tags.includes(preference);
-            return isAffordable && matchesPref;
+        // DATA HANDLING: Filtering based on logic
+        const filtered = data.filter(city => {
+            const affordable = city.daily_cost <= dailyBudget;
+            const matchVibe = preference === 'any' || city.tags.includes(preference);
+            return affordable && matchVibe;
         });
 
-        // 5. Update UI (DOM Manipulation)
-        renderResults(filtered, container);
-
-    } catch (error) {
-        console.error("Error loading data:", error);
-        container.innerHTML = "<p>Sorry, something went wrong.</p>";
+        displayResults(filtered, container);
+    } catch (err) {
+        console.error("Fetch error:", err);
+        container.innerHTML = "<p>Data could not be loaded. Are you using a Live Server?</p>";
     }
 });
 
-function renderResults(data, container) {
-    container.innerHTML = ""; // Clear old results
-
-    if (data.length === 0) {
-        container.innerHTML = "<p>No matches found for your budget. Try saving more or staying fewer days!</p>";
+function displayResults(cities, container) {
+    container.innerHTML = "";
+    
+    if (cities.length === 0) {
+        container.innerHTML = "<p>Try increasing your budget or shortening your trip!</p>";
         return;
     }
 
-    data.forEach(place => {
+    cities.forEach(city => {
         const card = document.createElement('div');
         card.className = 'city-card';
         card.innerHTML = `
-            <img src="${place.image}" alt="${place.city}">
-            <div class="card-content">
-                <h3>${place.city}, ${place.country}</h3>
-                <p><strong>Est. Cost:</strong> €${place.daily_cost}/day</p>
-                <p><strong>Activities:</strong> ${place.activities.join(", ")}</p>
+            <img src="${city.image}" alt="${city.city}">
+            <div class="card-body">
+                <h3>${city.city}, ${city.country}</h3>
+                <p><strong>Est. Cost:</strong> €${city.daily_cost}/day</p>
+                <div>${city.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>
+                <p><small>Activities: ${city.activities.join(", ")}</small></p>
             </div>
         `;
         container.appendChild(card);
