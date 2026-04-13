@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EuroTrip Budget Planner</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Europe Trip Suggester</h1>
+        <p>Find your perfect destination based on your pocket and passions.</p>
+    </header>
+
+    <main>
+        <section class="filter-section">
+            <div class="input-group">
+                <label>Total Budget (€)</label>
+                <input type="number" id="budget" placeholder="e.g. 1000">
+            </div>
+            <div class="input-group">
+                <label>Days to Stay</label>
+                <input type="number" id="days" placeholder="e.g. 7">
+            </div>
+            <div class="input-group">
+                <label>Preference</label>
+                <select id="preference">
+                    <option value="any">Surprise Me</option>
+                    <option value="history">History</option>
+                    <option value="nature">Nature</option>
+                    <option value="nightlife">Nightlife</option>
+                    <option value="art">Art</option>
+                </select>
+            </div>
+            <button id="search-btn">Find My Trip</button>
+        </section>
+
+        <section id="results-container" class="results-grid">
+            <p class="placeholder-text">Enter your details to see suggestions...</p>
+        </section>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>
