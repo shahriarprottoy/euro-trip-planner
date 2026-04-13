@@ -23,4 +23,150 @@
     "activities": ["Paragliding", "Lake Brienz", "Harder Kulm View"],
     "image": "https://images.unsplash.com/photo-1527668752968-14dc70a274dd?auto=format&fit=crop&w=400"
   }
+  
+  {
+    "city": "Vienna",
+    "country": "Austria",
+    "daily_cost": 70,
+    "tags": ["history", "culture", "architecture"],
+    "activities": ["Schönbrunn Palace", "Belvedere Museum", "Vienna State Opera"],
+    "image": "https://images.unsplash.com/photo-1516557070061-c3d1653fa646?auto=format&fit=crop&w=400"
+  },
+  {
+    "city": "Salzburg",
+    "country": "Austria",
+    "daily_cost": 65,
+    "tags": ["history", "nature", "music"],
+    "activities": ["Hohensalzburg Fortress", "Mirabell Gardens", "Mozart Birthplace"],
+    "image": "https://images.unsplash.com/photo-1505764706515-aa95265c5abc?auto=format&fit=crop&w=400"
+  },
+  {
+    "city": "Paris",
+    "country": "France",
+    "daily_cost": 85,
+    "tags": ["romantic", "culture", "food"],
+    "activities": ["Eiffel Tower", "Louvre Museum", "Seine River Walk"],
+    "image": "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=400"
+  },
+  {
+    "city": "Lyon",
+    "country": "France",
+    "daily_cost": 65,
+    "tags": ["food", "history"],
+    "activities": ["Old Town Lyon", "Basilica of Notre-Dame de Fourvière", "Local bouchons"],
+    "image": "https://images.unsplash.com/photo-1522093007474-d86e9bf7ba6f?auto=format&fit=crop&w=400"
+  },
+  {
+    "city": "Berlin",
+    "country": "Germany",
+    "daily_cost": 60,
+    "tags": ["history", "nightlife", "culture"],
+    "activities": ["Brandenburg Gate", "Berlin Wall", "Techno clubs"],
+    "image": "https://images.unsplash.com/photo-1467269204594-9661b134dd2b?auto=format&fit=crop&w=400"
+  },
+  {
+    "city": "Munich",
+    "country": "Germany",
+    "daily_cost": 70,
+    "tags": ["culture", "beer", "history"],
+    "activities": ["Marienplatz", "English Garden", "Beer halls"],
+    "image": "https://images.unsplash.com/photo-1505765050516-f72dcac9c60b?auto=format&fit=crop&w=400"
+  },
+  {
+    "city": "Rome",
+    "country": "Italy",
+    "daily_cost": 70,
+    "tags": ["history", "culture", "food"],
+    "activities": ["Colosseum", "Vatican Museums", "Trevi Fountain"],
+    "image": "https://images.unsplash.com/photo-1526483360412-f4dbaf036963?auto=format&fit=crop&w=400"
+  },
+  {
+    "city": "Milan",
+    "country": "Italy",
+    "daily_cost": 75,
+    "tags": ["fashion", "city", "food"],
+    "activities": ["Duomo di Milano", "Galleria Vittorio Emanuele II", "Shopping districts"],
+    "image": "https://images.unsplash.com/photo-1505842465776-3d2c3c8aebc2?auto=format&fit=crop&w=400"
+  },
+  {
+    "city": "Madrid",
+    "country": "Spain",
+    "daily_cost": 60,
+    "tags": ["nightlife", "culture", "food"],
+    "activities": ["Prado Museum", "Retiro Park", "Tapas bars"],
+    "image": "https://images.unsplash.com/photo-1543340713-8f3a5b62cfa7?auto=format&fit=crop&w=400"
+  },
+  {
+    "city": "Barcelona",
+    "country": "Spain",
+    "daily_cost": 65,
+    "tags": ["beach", "architecture", "nightlife"],
+    "activities": ["Sagrada Familia", "Park Güell", "Beachfront"],
+    "image": "https://images.unsplash.com/photo-1505731131651-3b57b9d9c2c0?auto=format&fit=crop&w=400"
+  },
+  {
+    "city": "Amsterdam",
+    "country": "Netherlands",
+    "daily_cost": 75,
+    "tags": ["nightlife", "culture", "canals"],
+    "activities": ["Canal cruise", "Van Gogh Museum", "Bike tours"],
+    "image": "https://images.unsplash.com/photo-1505761671935-60b3a7427bad?auto=format&fit=crop&w=400"
+  },
+  {
+    "city": "Rotterdam",
+    "country": "Netherlands",
+    "daily_cost": 65,
+    "tags": ["modern", "architecture"],
+    "activities": ["Cube Houses", "Erasmus Bridge", "Food halls"],
+    "image": "https://images.unsplash.com/photo-1512470876302-972faa2aa9a4?auto=format&fit=crop&w=400"
+  },
+  {
+    "city": "Prague",
+    "country": "Czech Republic",
+    "daily_cost": 50,
+    "tags": ["history", "budget", "nightlife"],
+    "activities": ["Charles Bridge", "Old Town Square", "Prague Castle"],
+    "image": "https://images.unsplash.com/photo-1505765059034-53d0d68b89b9?auto=format&fit=crop&w=400"
+  },
+  {
+    "city": "Brno",
+    "country": "Czech Republic",
+    "daily_cost": 45,
+    "tags": ["budget", "local", "culture"],
+    "activities": ["Špilberk Castle", "Cathedral of St. Peter and Paul", "Cafés"],
+    "image": "https://images.unsplash.com/photo-1596627116793-9f2d9e9cbe4b?auto=format&fit=crop&w=400"
+  },
+  {
+    "city": "Lisbon",
+    "country": "Portugal",
+    "daily_cost": 55,
+    "tags": ["budget", "views", "culture"],
+    "activities": ["Tram 28", "Alfama district", "Belém Tower"],
+    "image": "https://images.unsplash.com/photo-1505761671935-60b3a7427bad?auto=format&fit=crop&w=400"
+  },
+  {
+    "city": "Porto",
+    "country": "Portugal",
+    "daily_cost": 50,
+    "tags": ["wine", "views", "relaxed"],
+    "activities": ["Douro River", "Wine cellars", "Ribeira district"],
+    "image": "https://images.unsplash.com/photo-1513735492246-483525079686?auto=format&fit=crop&w=400"
+  },
+  {
+    "city": "Athens",
+    "country": "Greece",
+    "daily_cost": 55,
+    "tags": ["history", "culture"],
+    "activities": ["Acropolis", "Parthenon", "Plaka district"],
+    "image": "https://images.unsplash.com/photo-1503152394-1c6c7a3e3b59?auto=format&fit=crop&w=400"
+  },
+  {
+    "city": "Thessaloniki",
+    "country": "Greece",
+    "daily_cost": 50,
+    "tags": ["food", "nightlife"],
+    "activities": ["White Tower", "Waterfront", "Local tavernas"],
+    "image": "https://images.unsplash.com/photo-1603565816030-6b389eeb23cb?auto=format&fit=crop&w=400"
+  }
+
 ]
