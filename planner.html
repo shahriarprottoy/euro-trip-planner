@@ -3,53 +3,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EuroTrip Budget Planner</title>
+    <title>EuroTrip | Planner</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <button class="logout-btn" onclick="logout()">Logout</button>
-<h2>Welcome, <span id="user-display"></span>!</h2>
+    <nav class="navbar">
+        <div class="nav-brand">EuroTrip Planner</div>
+        <div class="nav-user">
+            <span id="user-display"></span>
+            <button class="logout-btn" onclick="logout()">Logout</button>
+        </div>
+    </nav>
 
-<script>
-    document.getElementById('user-display').innerText = localStorage.getItem('userName');
-    
-    function logout() {
-        localStorage.clear();
-        window.location.href = 'index.html';
-    }
-</script>
-    <header>
-        <h1>Europe Trip Suggester</h1>
-        <p>Discover where your budget can take you.</p>
-    </header>
+    <main class="container">
+        <header class="planner-header">
+            <h1>Find Your Next Adventure</h1>
+            <p>Enter your details below to see cities that match your budget and style.</p>
+        </header>
 
-    <main>
-        <div class="card-panel">
+        <section class="card-panel">
             <div class="input-group">
-                <label>Total Budget (€)</label>
+                <label for="budget">Total Budget (€)</label>
                 <input type="number" id="budget" placeholder="e.g. 1000">
             </div>
             <div class="input-group">
-                <label>Duration (Days)</label>
+                <label for="days">Duration (Days)</label>
                 <input type="number" id="days" placeholder="e.g. 7">
             </div>
             <div class="input-group">
-                <label>Vibe</label>
+                <label for="preference">Vibe</label>
                 <select id="preference">
                     <option value="any">Surprise Me</option>
                     <option value="history">History</option>
                     <option value="nightlife">Nightlife</option>
                     <option value="food">Food</option>
+                    <option value="culture">Culture</option>
                     <option value="nature">Nature</option>
-                    <option value="budget">Budget Friendly</option>
                 </select>
             </div>
             <button id="search-btn">Search Destinations</button>
-        </div>
+        </section>
 
-        <div id="results-container" class="results-grid">
+        <section id="results-container" class="results-grid">
+            <p class="placeholder-text">Enter your details to see suggestions...</p>
+        </section>
+
+        <hr class="divider">
+
+        <section class="profile-section">
+            <div class="profile-content">
+                <h2>Your Traveler Profile</h2>
+                <p id="user-info-display" class="user-status"></p>
+                
+                <div class="feedback-container">
+                    <h3>Share Your Recent Trip</h3>
+                    <p>Help our community by sharing costs from a city you've visited!</p>
+                    <form id="feedback-form">
+                        <div class="form-row">
+                            <input type="text" id="visited-city" placeholder="City Name" required>
+                            <input type="text" id="visited-country" placeholder="Country" required>
+                        </div>
+                        <input type="number" id="actual-cost" placeholder="Actual Daily Cost (€)" required>
+                        <textarea id="trip-notes" placeholder="Any tips for other travelers?" rows="3"></textarea>
+                        <button type="submit" class="submit-btn">Save Trip to Profile</button>
+                    </form>
+                </div>
+
+                <div class="history-container">
+                    <h3>Your Saved History</h3>
+                    <ul id="history-list" class="history-list">
+                        </ul>
+                </div>
             </div>
+        </section>
     </main>
+
+    <script src="auth.js"></script>
     <script src="app.js"></script>
 </body>
 </html>
