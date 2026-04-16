@@ -7,6 +7,17 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <button class="logout-btn" onclick="logout()">Logout</button>
+<h2>Welcome, <span id="user-display"></span>!</h2>
+
+<script>
+    document.getElementById('user-display').innerText = localStorage.getItem('userName');
+    
+    function logout() {
+        localStorage.clear();
+        window.location.href = 'index.html';
+    }
+</script>
     <header>
         <h1>Europe Trip Suggester</h1>
         <p>Discover where your budget can take you.</p>
