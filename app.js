@@ -1,58 +1,137 @@
+/**
+ * EUROTRIP PLANNER - MAIN LOGIC
+ * Handles searching, filtering, and user feedback history.
+ */
+
+// --- 1. INITIALIZATION & SESSION ---
+document.addEventListener('DOMContentLoaded', () => {
+    const user = localStorage.getItem('userName') || 'Guest';
+    const display = document.getElementById('user-display');
+    const status = document.getElementById('user-info-display');
+    
+    if (display) display.innerText = user;
+    if (status) status.innerText = `Logged in as: ${user}`;
+    
+    displayTripHistory();
+});
+
+// --- 2. SEARCH & FILTER LOGIC ---
 document.getElementById('search-btn').addEventListener('click', async () => {
     const budget = parseFloat(document.getElementById('budget').value);
     const days = parseInt(document.getElementById('days').value);
     const preference = document.getElementById('preference').value;
     const container = document.getElementById('results-container');
 
-    if (!budget || !days) {
-        alert("Please enter budget and days.");
+    // Validation
+    if (!budget || !days || budget <= 0 || days <= 0) {
+        alert("Please enter valid budget and duration values.");
         return;
     }
 
-    // ARCHITECTURE: Checking if we are local or on GitHub
+    container.innerHTML = "<div class='loader'>Searching destinations...</div>";
+
+    // Architecture Check: Determine if fetching from Local Server or Local File
     const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
     const API_URL = isLocal ? 'http://localhost:3000/api/destinations' : 'data.json';
 
     try {
         const response = await fetch(API_URL);
-        const data = await response.json();
+        if (!response.ok) throw new Error("Data source unreachable");
+        
+        const allDestinations = await response.json();
 
-        const dailyBudget = budget / days;
+        // Core Algorithm: Calculate Daily Allowance
+        const dailyAllowance = budget / days;
 
-        // DATA HANDLING: Filtering based on logic
-        const filtered = data.filter(city => {
-            const affordable = city.daily_cost <= dailyBudget;
-            const matchVibe = preference === 'any' || city.tags.includes(preference);
-            return affordable && matchVibe;
+        // Filter Logic
+        const filtered = allDestinations.filter(place => {
+            const isAffordable = place.daily_cost <= dailyAllowance;
+            const matchesVibe = preference === 'any' || place.tags.includes(preference);
+            return isAffordable && matchesVibe;
         });
 
-        displayResults(filtered, container);
-    } catch (err) {
-        console.error("Fetch error:", err);
-        container.innerHTML = "<p>Data could not be loaded. Are you using a Live Server?</p>";
+        renderCityCards(filtered, container);
+    } catch (error) {
+        console.error("Fetch error:", error);
+        container.innerHTML = "<p class='error'>Unable to load data. Please ensure you are using a Live Server or check data.json.</p>";
     }
 });
 
-function displayResults(cities, container) {
+// --- 3. UI RENDERING ---
+function renderCityCards(data, container) {
     container.innerHTML = "";
-    
-    if (cities.length === 0) {
-        container.innerHTML = "<p>Try increasing your budget or shortening your trip!</p>";
+
+    if (data.length === 0) {
+        container.innerHTML = "<p class='no-results'>No cities match your criteria. Try increasing your budget!</p>";
         return;
     }
 
-    cities.forEach(city => {
+    data.forEach(city => {
         const card = document.createElement('div');
         card.className = 'city-card';
         card.innerHTML = `
-            <img src="${city.image}" alt="${city.city}">
+            <div class="card-img-wrapper">
+                <img src="${city.image}" alt="${city.city}" loading="lazy">
+                <span class="price-badge">€${city.daily_cost}/day</span>
+            </div>
             <div class="card-body">
                 <h3>${city.city}, ${city.country}</h3>
-                <p><strong>Est. Cost:</strong> €${city.daily_cost}/day</p>
-                <div>${city.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>
-                <p><small>Activities: ${city.activities.join(", ")}</small></p>
+                <div class="tags">
+                    ${city.tags.map(t => `<span class="tag-pill">${t}</span>`).join('')}
+                </div>
+                <p><strong>Top Activities:</strong> ${city.activities.join(", ")}</p>
             </div>
         `;
         container.appendChild(card);
     });
+}
+
+// --- 4. FEEDBACK & HISTORY LOGIC ---
+document.getElementById('feedback-form').addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const newTrip = {
+        city: document.getElementById('visited-city').value,
+        country: document.getElementById('visited-country').value,
+        cost: document.getElementById('actual-cost').value,
+        notes: document.getElementById('trip-notes').value,
+        date: new Date().toLocaleDateString()
+    };
+
+    // Store in LocalStorage (Simulating a database)
+    let history = JSON.parse(localStorage.getItem('userTrips')) || [];
+    history.push(newTrip);
+    localStorage.setItem('userTrips', JSON.stringify(history));
+
+    e.target.reset();
+    displayTripHistory();
+    alert("Trip saved to your profile history!");
+});
+
+function displayTripHistory() {
+    const list = document.getElementById('history-list');
+    const history = JSON.parse(localStorage.getItem('userTrips')) || [];
+    
+    if (history.length === 0) {
+        list.innerHTML = "<li class='empty-msg'>No trip history yet.</li>";
+        return;
+    }
+
+    list.innerHTML = history.map(trip => `
+        <li class="history-item">
+            <div class="history-meta">
+                <strong>${trip.city}, ${trip.country}</strong>
+                <span>€${trip.cost}/day</span>
+            </div>
+            <p class="history-notes">${trip.notes}</p>
+            <span class="history-date">Visited on: ${trip.date}</span>
+        </li>
+    `).join('');
+}
+
+// --- 5. LOGOUT FUNCTION ---
+function logout() {
+    localStorage.removeItem('isLoggedIn');
+    localStorage.removeItem('userName');
+    window.location.href = 'index.html';
 }
