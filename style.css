@@ -120,3 +120,40 @@ button:hover { opacity: 0.9; }
     right: 20px;
     background: #ef4444;
 }
+.profile-section {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+.feedback-container {
+    background: #f1f5f9;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+#feedback-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#feedback-form textarea {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    resize: vertical;
+}
+
+.history-item {
+    list-style: none;
+    padding: 15px;
+    border-left: 4px solid var(--primary);
+    background: #fafafa;
+    margin-bottom: 10px;
+    border-radius: 0 8px 8px 0;
+}
