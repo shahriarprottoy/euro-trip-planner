@@ -158,6 +158,165 @@
     "tags": ["food", "nightlife"],
     "activities": ["White Tower", "Waterfront", "Local tavernas"],
     "image": "https://images.unsplash.com/photo-1603565816030-6b389eeb23cb?auto=format&fit=crop&w=400"
+  },
+  {
+    "city": "Dubrovnik",
+    "country": "Croatia",
+    "daily_cost": 80,
+    "tags": ["history", "sea", "culture"],
+    "activities": ["Old Town Walls", "Lokrum Island", "Cable Car Ride"],
+    "image": "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=400"
+  },
+  {
+    "city": "Split",
+    "country": "Croatia",
+    "daily_cost": 70,
+    "tags": ["beach", "history", "relaxed"],
+    "activities": ["Diocletian's Palace", "Riva Promenade", "Marjan Hill"],
+    "image": "https://images.unsplash.com/photo-1555993539-1732b0258235?auto=format&fit=crop&w=400"
+  },
+  {
+    "city": "Lucerne",
+    "country": "Switzerland",
+    "daily_cost": 180,
+    "tags": ["nature", "lakes", "views"],
+    "activities": ["Lake Lucerne", "Chapel Bridge", "Mount Pilatus"],
+    "image": "https://images.unsplash.com/photo-1527668752968-14dc70a274dd?auto=format&fit=crop&w=400"
+  },
+  {
+    "city": "Copenhagen",
+    "country": "Denmark",
+    "daily_cost": 120,
+    "tags": ["modern", "cycling", "culture"],
+    "activities": ["Nyhavn", "Tivoli Gardens", "Little Mermaid"],
+    "image": "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=400"
+  },
+  {
+    "city": "Stockholm",
+    "country": "Sweden",
+    "daily_cost": 130,
+    "tags": ["islands", "modern", "culture"],
+    "activities": ["Gamla Stan", "Vasa Museum", "Archipelago Tour"],
+    "image": "https://images.unsplash.com/photo-1509356843151-3e7d96241e11?auto=format&fit=crop&w=400"
+  },
+  {
+    "city": "Oslo",
+    "country": "Norway",
+    "daily_cost": 140,
+    "tags": ["nature", "modern", "fjord"],
+    "activities": ["Opera House", "Vigeland Park", "Oslo Fjord"],
+    "image": "https://images.unsplash.com/photo-1527766833261-b09c3163a791?auto=format&fit=crop&w=400"
+  },
+  {
+    "city": "Zagreb",
+    "country": "Croatia",
+    "daily_cost": 60,
+    "tags": ["culture", "budget", "city"],
+    "activities": ["Ban Jelačić Square", "Museum of Broken Relationships", "Zagreb Cathedral"],
+    "image": "https://images.unsplash.com/photo-1555993539-1732b0258235?auto=format&fit=crop&w=400"
+  },
+  {
+    "city": "Aarhus",
+    "country": "Denmark",
+    "daily_cost": 100,
+    "tags": ["culture", "modern", "coastal"],
+    "activities": ["ARoS Museum", "Old Town (Den Gamle By)", "Harbor Walk"],
+    "image": "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=400"
+  },
+  {
+    "city": "Gothenburg",
+    "country": "Sweden",
+    "daily_cost": 110,
+    "tags": ["food", "coastal", "relaxed"],
+    "activities": ["Liseberg Park", "Archipelago Islands", "Haga District"],
+    "image": "https://images.unsplash.com/photo-1509356843151-3e7d96241e11?auto=format&fit=crop&w=400"
+  },
+  {
+    "city": "Bergen",
+    "country": "Norway",
+    "daily_cost": 150,
+    "tags": ["fjord", "nature", "historic"],
+    "activities": ["Bryggen Wharf", "Fløibanen Funicular", "Norwegian Fjords"],
+    "image": "https://images.unsplash.com/photo-1527766833261-b09c3163a791?auto=format&fit=crop&w=400"
+  },
+  {
+    "city": "Zurich",
+    "country": "Switzerland",
+    "daily_cost": 190,
+    "tags": ["modern", "finance", "lake"],
+    "activities": ["Lake Zurich", "Old Town", "Bahnhofstrasse Shopping"],
+    "image": "https://images.unsplash.com/photo-1527668752968-14dc70a274dd?auto=format&fit=crop&w=400"
+  },
+  {
+    "city": "Nice",
+    "country": "France",
+    "daily_cost": 90,
+    "tags": ["beach", "luxury", "relaxed"],
+    "activities": ["Promenade des Anglais", "Old Town Nice", "Mediterranean Beaches"],
+    "image": "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=400"
+  },
+  {
+    "city": "Marseille",
+    "country": "France",
+    "daily_cost": 75,
+    "tags": ["port", "culture", "sea"],
+    "activities": ["Old Port", "Calanques National Park", "Notre-Dame de la Garde"],
+    "image": "https://images.unsplash.com/photo-1522093007474-d86e9bf7ba6f?auto=format&fit=crop&w=400"
+  },
+  {
+    "city": "Venice",
+    "country": "Italy",
+    "daily_cost": 95,
+    "tags": ["romantic", "canals", "culture"],
+    "activities": ["Gondola Ride", "St. Mark’s Square", "Rialto Bridge"],
+    "image": "https://images.unsplash.com/photo-1505842465776-3d2c3c8aebc2?auto=format&fit=crop&w=400"
+  },
+  {
+    "city": "Florence",
+    "country": "Italy",
+    "daily_cost": 85,
+    "tags": ["art", "history", "culture"],
+    "activities": ["Duomo", "Uffizi Gallery", "Ponte Vecchio"],
+    "image": "https://images.unsplash.com/photo-1526483360412-f4dbaf036963?auto=format&fit=crop&w=400"
+  },
+  {
+    "city": "Seville",
+    "country": "Spain",
+    "daily_cost": 55,
+    "tags": ["culture", "music", "history"],
+    "activities": ["Seville Cathedral", "Alcázar Palace", "Flamenco Shows"],
+    "image": "https://images.unsplash.com/photo-1543340713-8f3a5b62cfa7?auto=format&fit=crop&w=400"
+  },
+  {
+    "city": "Faro",
+    "country": "Portugal",
+    "daily_cost": 50,
+    "tags": ["beach", "relaxed", "nature"],
+    "activities": ["Ria Formosa", "Old Town Faro", "Island Beaches"],
+    "image": "https://images.unsplash.com/photo-1505761671935-60b3a7427bad?auto=format&fit=crop&w=400"
+  },
+  {
+    "city": "Olomouc",
+    "country": "Czech Republic",
+    "daily_cost": 45,
+    "tags": ["history", "budget", "local"],
+    "activities": ["Holy Trinity Column", "Old Town Square", "Cathedral of St. Wenceslas"],
+    "image": "https://images.unsplash.com/photo-1505765059034-53d0d68b89b9?auto=format&fit=crop&w=400"
+  },
+  {
+    "city": "Helsinki",
+    "country": "Finland",
+    "daily_cost": 110,
+    "tags": ["design", "sea", "modern"],
+    "activities": ["Suomenlinna Fortress", "Market Square", "Temppeliaukio Church"],
+    "image": "https://images.unsplash.com/photo-1508057198894-247b23fe5ade?auto=format&fit=crop&w=400"
+  },
+  {
+    "city": "Brussels",
+    "country": "Belgium",
+    "daily_cost": 90,
+    "tags": ["culture", "food", "history"],
+    "activities": ["Grand Place", "Atomium", "Manneken Pis"],
+    "image": "https://images.unsplash.com/photo-1528747045269-390fe33c19d5?auto=format&fit=crop&w=400"
   }
-
 ]
