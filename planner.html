@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EuroTrip | Planner</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
@@ -12,7 +13,7 @@
         <div class="nav-brand"><strong>EuroTrip</strong> Planner</div>
         <div class="nav-user">
             <span id="user-display"></span>
-            <button onclick="logout()" style="background:#ef4444; margin-left:10px; padding:5px 10px;">Logout</button>
+            <button onclick="logout()" style="background:#ef4444; margin-left:10px; padding:5px 10px; border-radius:5px; border:none; color:white; cursor:pointer;">Logout</button>
         </div>
     </nav>
 
@@ -20,11 +21,11 @@
         <section class="card-panel">
             <div class="input-group">
                 <label>Budget</label>
-                <input type="number" id="budget" placeholder="€">
+                <input type="number" id="budget" placeholder="Amount">
             </div>
             <div class="input-group">
                 <label>Days</label>
-                <input type="number" id="days" placeholder="Qty">
+                <input type="number" id="days" placeholder="Days">
             </div>
             <div class="input-group">
                 <label>Currency</label>
@@ -37,7 +38,7 @@
             <div class="input-group">
                 <label>Vibe</label>
                 <select id="preference">
-                    <option value="any">All</option>
+                    <option value="any">All Vibes</option>
                     <option value="history">History</option>
                     <option value="nightlife">Nightlife</option>
                     <option value="nature">Nature</option>
@@ -46,18 +47,46 @@
             <button id="search-btn" style="align-self: flex-end;">Search</button>
         </section>
 
-        <div id="map"></div>
+        <div id="map" style="height: 400px; border-radius: 12px; margin-bottom: 2rem;"></div>
 
-        <div id="results-container" class="results-grid"></div>
+        <div id="results-container" class="results-grid">
+            </div>
+
+        <hr class="divider">
+        <section class="profile-section">
+            <div class="profile-content">
+                <h2>Traveler Profile & Feedback</h2>
+                <p id="user-info-display" class="user-status"></p>
+                
+                <div class="feedback-container">
+                    <h3>Share Your Recent Trip</h3>
+                    <form id="feedback-form">
+                        <div style="display: flex; gap: 10px; margin-bottom: 10px;">
+                            <input type="text" id="visited-city" placeholder="City Name" style="flex:1" required>
+                            <input type="text" id="visited-country" placeholder="Country" style="flex:1" required>
+                        </div>
+                        <input type="number" id="actual-cost" placeholder="Actual Daily Cost" style="width: 100%; margin-bottom: 10px;" required>
+                        <textarea id="trip-notes" placeholder="Any tips for other travelers?" rows="3" style="width: 100%; margin-bottom: 10px; border-radius: 8px; border: 1px solid #ddd; padding: 10px;"></textarea>
+                        <button type="submit" class="submit-btn" style="width: 100%; background: #10b981;">Save Trip to Profile</button>
+                    </form>
+                </div>
+
+                <div class="history-container">
+                    <h3>Your Saved History</h3>
+                    <ul id="history-list" class="history-list">
+                        </ul>
+                </div>
+            </div>
+        </section>
 
         <div id="comparison-tray" class="comparison-tray hidden">
             <span id="compare-count">0 selected</span>
-            <button id="open-compare-btn" style="background:white; color:var(--primary); margin-left:15px;">Compare Now</button>
+            <button id="open-compare-btn" style="background:white; color:var(--primary); margin-left:15px; border-radius: 20px; padding: 5px 15px;">Compare Now</button>
         </div>
 
         <div id="compare-modal" class="modal hidden">
             <div class="modal-content">
-                <button onclick="document.getElementById('compare-modal').classList.add('hidden')" style="float:right;">Close</button>
+                <button onclick="document.getElementById('compare-modal').classList.add('hidden')" style="float:right; background:none; border:none; font-size: 20px; cursor:pointer;">&times;</button>
                 <h2>Comparison Table</h2>
                 <div id="compare-table-container"></div>
             </div>
