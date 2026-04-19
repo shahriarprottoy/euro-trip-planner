@@ -2,86 +2,67 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EuroTrip | Planner</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 </head>
 <body>
     <nav class="navbar">
-        <div class="nav-brand">EuroTrip Planner</div>
+        <div class="nav-brand"><strong>EuroTrip</strong> Planner</div>
         <div class="nav-user">
             <span id="user-display"></span>
-            <button class="logout-btn" onclick="logout()">Logout</button>
+            <button onclick="logout()" style="background:#ef4444; margin-left:10px; padding:5px 10px;">Logout</button>
         </div>
     </nav>
 
-    <main class="container">
-        <header class="planner-header">
-            <h1>Find Your Next Adventure</h1>
-            <p>Enter your details below to see cities that match your budget and style.</p>
-        </header>
-
+    <div class="container">
         <section class="card-panel">
             <div class="input-group">
-                <label for="budget">Total Budget (€)</label>
-                <input type="number" id="budget" placeholder="e.g. 1000">
+                <label>Budget</label>
+                <input type="number" id="budget" placeholder="€">
             </div>
             <div class="input-group">
-                <label for="days">Duration (Days)</label>
-                <input type="number" id="days" placeholder="e.g. 7">
+                <label>Days</label>
+                <input type="number" id="days" placeholder="Qty">
             </div>
             <div class="input-group">
-                <label for="preference">Vibe</label>
-                <select id="preference">
-                    <option value="any">Surprise Me</option>
-                    <option value="history">History</option>
-                    <option value="nightlife">Nightlife</option>
-                    <option value="food">Food</option>
-                    <option value="culture">Culture</option>
-                    <option value="nature">Nature</option>
+                <label>Currency</label>
+                <select id="currency-select">
+                    <option value="EUR">EUR (€)</option>
+                    <option value="USD">USD ($)</option>
+                    <option value="GBP">GBP (£)</option>
                 </select>
             </div>
             <div class="input-group">
-              <label for="city-search">Search City</label>
-              <input type="text" id="city-search" placeholder="e.g. Paris, Rome, Budapest">
+                <label>Vibe</label>
+                <select id="preference">
+                    <option value="any">All</option>
+                    <option value="history">History</option>
+                    <option value="nightlife">Nightlife</option>
+                    <option value="nature">Nature</option>
+                </select>
             </div>
-
-            <button id="search-btn">Search Destinations</button>
+            <button id="search-btn" style="align-self: flex-end;">Search</button>
         </section>
 
-        <section id="results-container" class="results-grid">
-            <p class="placeholder-text">Enter your details to see suggestions...</p>
-        </section>
+        <div id="map"></div>
 
-        <hr class="divider">
+        <div id="results-container" class="results-grid"></div>
 
-        <section class="profile-section">
-            <div class="profile-content">
-                <h2>Your Traveler Profile</h2>
-                <p id="user-info-display" class="user-status"></p>
-                
-                <div class="feedback-container">
-                    <h3>Share Your Recent Trip</h3>
-                    <p>Help our community by sharing costs from a city you've visited!</p>
-                    <form id="feedback-form">
-                        <div class="form-row">
-                            <input type="text" id="visited-city" placeholder="City Name" required>
-                            <input type="text" id="visited-country" placeholder="Country" required>
-                        </div>
-                        <input type="number" id="actual-cost" placeholder="Actual Daily Cost (€)" required>
-                        <textarea id="trip-notes" placeholder="Any tips for other travelers?" rows="3"></textarea>
-                        <button type="submit" class="submit-btn">Save Trip to Profile</button>
-                    </form>
-                </div>
+        <div id="comparison-tray" class="comparison-tray hidden">
+            <span id="compare-count">0 selected</span>
+            <button id="open-compare-btn" style="background:white; color:var(--primary); margin-left:15px;">Compare Now</button>
+        </div>
 
-                <div class="history-container">
-                    <h3>Your Saved History</h3>
-                    <ul id="history-list" class="history-list">
-                        </ul>
-                </div>
+        <div id="compare-modal" class="modal hidden">
+            <div class="modal-content">
+                <button onclick="document.getElementById('compare-modal').classList.add('hidden')" style="float:right;">Close</button>
+                <h2>Comparison Table</h2>
+                <div id="compare-table-container"></div>
             </div>
-        </section>
-    </main>
+        </div>
+    </div>
 
     <script src="auth.js"></script>
     <script src="app.js"></script>
