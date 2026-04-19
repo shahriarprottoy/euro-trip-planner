@@ -3,6 +3,8 @@
     "city": "Budapest",
     "country": "Hungary",
     "daily_cost": 50,
+    "lat": 47.4979,
+    "lng": 19.0402,
     "tags": ["history", "nightlife"],
     "activities": ["Szechenyi Baths", "Ruin Bars", "Buda Castle"],
     "image": "https://images.unsplash.com/photo-1551840231-b5ef0e840450?auto=format&fit=crop&w=400"
@@ -11,6 +13,8 @@
     "city": "Interlaken",
     "country": "Switzerland",
     "daily_cost": 200,
+    "lat": 46.6863,
+    "lng": 7.8632,
     "tags": ["nature", "adventure"],
     "activities": ["Paragliding", "Lake Brienz", "Harder Kulm View"],
     "image": "https://images.unsplash.com/photo-1527668752968-14dc70a274dd?auto=format&fit=crop&w=400"
@@ -19,6 +23,8 @@
     "city": "Vienna",
     "country": "Austria",
     "daily_cost": 70,
+    "lat": 48.2082,
+    "lng": 16.3738,
     "tags": ["history", "culture", "architecture"],
     "activities": ["Schönbrunn Palace", "Belvedere Museum", "Vienna State Opera"],
     "image": "https://images.unsplash.com/photo-1516557070061-c3d1653fa646?auto=format&fit=crop&w=400"
@@ -27,6 +33,8 @@
     "city": "Salzburg",
     "country": "Austria",
     "daily_cost": 65,
+    "lat": 47.8095,
+    "lng": 13.055,
     "tags": ["history", "nature", "music"],
     "activities": ["Hohensalzburg Fortress", "Mirabell Gardens", "Mozart Birthplace"],
     "image": "https://images.unsplash.com/photo-1505764706515-aa95265c5abc?auto=format&fit=crop&w=400"
@@ -35,6 +43,8 @@
     "city": "Paris",
     "country": "France",
     "daily_cost": 85,
+    "lat": 48.8566,
+    "lng": 2.3522,
     "tags": ["romantic", "culture", "food"],
     "activities": ["Eiffel Tower", "Louvre Museum", "Seine River Walk"],
     "image": "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=400"
@@ -43,6 +53,8 @@
     "city": "Lyon",
     "country": "France",
     "daily_cost": 65,
+    "lat": 45.764,
+    "lng": 4.8357,
     "tags": ["food", "history"],
     "activities": ["Old Town Lyon", "Basilica of Notre-Dame de Fourvière", "Local bouchons"],
     "image": "https://images.unsplash.com/photo-1522093007474-d86e9bf7ba6f?auto=format&fit=crop&w=400"
@@ -51,6 +63,8 @@
     "city": "Berlin",
     "country": "Germany",
     "daily_cost": 60,
+    "lat": 52.52,
+    "lng": 13.405,
     "tags": ["history", "nightlife", "culture"],
     "activities": ["Brandenburg Gate", "Berlin Wall", "Techno clubs"],
     "image": "https://images.unsplash.com/photo-1467269204594-9661b134dd2b?auto=format&fit=crop&w=400"
@@ -59,6 +73,8 @@
     "city": "Munich",
     "country": "Germany",
     "daily_cost": 70,
+    "lat": 48.1351,
+    "lng": 11.582,
     "tags": ["culture", "beer", "history"],
     "activities": ["Marienplatz", "English Garden", "Beer halls"],
     "image": "https://images.unsplash.com/photo-1505765050516-f72dcac9c60b?auto=format&fit=crop&w=400"
@@ -67,6 +83,8 @@
     "city": "Rome",
     "country": "Italy",
     "daily_cost": 70,
+    "lat": 41.9028,
+    "lng": 12.4964,
     "tags": ["history", "culture", "food"],
     "activities": ["Colosseum", "Vatican Museums", "Trevi Fountain"],
     "image": "https://images.unsplash.com/photo-1526483360412-f4dbaf036963?auto=format&fit=crop&w=400"
@@ -75,6 +93,8 @@
     "city": "Milan",
     "country": "Italy",
     "daily_cost": 75,
+    "lat": 45.4642,
+    "lng": 9.19,
     "tags": ["fashion", "city", "food"],
     "activities": ["Duomo di Milano", "Galleria Vittorio Emanuele II", "Shopping districts"],
     "image": "https://images.unsplash.com/photo-1505842465776-3d2c3c8aebc2?auto=format&fit=crop&w=400"
@@ -83,6 +103,8 @@
     "city": "Madrid",
     "country": "Spain",
     "daily_cost": 60,
+    "lat": 40.4168,
+    "lng": -3.7038,
     "tags": ["nightlife", "culture", "food"],
     "activities": ["Prado Museum", "Retiro Park", "Tapas bars"],
     "image": "https://images.unsplash.com/photo-1543340713-8f3a5b62cfa7?auto=format&fit=crop&w=400"
@@ -91,6 +113,8 @@
     "city": "Barcelona",
     "country": "Spain",
     "daily_cost": 65,
+    "lat": 41.3851,
+    "lng": 2.1734,
     "tags": ["beach", "architecture", "nightlife"],
     "activities": ["Sagrada Familia", "Park Güell", "Beachfront"],
     "image": "https://images.unsplash.com/photo-1505731131651-3b57b9d9c2c0?auto=format&fit=crop&w=400"
@@ -99,6 +123,8 @@
     "city": "Amsterdam",
     "country": "Netherlands",
     "daily_cost": 75,
+    "lat": 52.3676,
+    "lng": 4.9041,
     "tags": ["nightlife", "culture", "canals"],
     "activities": ["Canal cruise", "Van Gogh Museum", "Bike tours"],
     "image": "https://images.unsplash.com/photo-1505761671935-60b3a7427bad?auto=format&fit=crop&w=400"
@@ -107,6 +133,8 @@
     "city": "Rotterdam",
     "country": "Netherlands",
     "daily_cost": 65,
+    "lat": 51.9225,
+    "lng": 4.4792,
     "tags": ["modern", "architecture"],
     "activities": ["Cube Houses", "Erasmus Bridge", "Food halls"],
     "image": "https://images.unsplash.com/photo-1512470876302-972faa2aa9a4?auto=format&fit=crop&w=400"
@@ -115,6 +143,8 @@
     "city": "Prague",
     "country": "Czech Republic",
     "daily_cost": 50,
+    "lat": 50.0755,
+    "lng": 14.4378,
     "tags": ["history", "budget", "nightlife"],
     "activities": ["Charles Bridge", "Old Town Square", "Prague Castle"],
     "image": "https://images.unsplash.com/photo-1505765059034-53d0d68b89b9?auto=format&fit=crop&w=400"
@@ -123,6 +153,8 @@
     "city": "Brno",
     "country": "Czech Republic",
     "daily_cost": 45,
+    "lat": 49.1951,
+    "lng": 16.6068,
     "tags": ["budget", "local", "culture"],
     "activities": ["Špilberk Castle", "Cathedral of St. Peter and Paul", "Cafés"],
     "image": "https://images.unsplash.com/photo-1596627116793-9f2d9e9cbe4b?auto=format&fit=crop&w=400"
@@ -131,6 +163,8 @@
     "city": "Lisbon",
     "country": "Portugal",
     "daily_cost": 55,
+    "lat": 38.7223,
+    "lng": -9.1393,
     "tags": ["budget", "views", "culture"],
     "activities": ["Tram 28", "Alfama district", "Belém Tower"],
     "image": "https://images.unsplash.com/photo-1505761671935-60b3a7427bad?auto=format&fit=crop&w=400"
@@ -139,6 +173,8 @@
     "city": "Porto",
     "country": "Portugal",
     "daily_cost": 50,
+    "lat": 41.1579,
+    "lng": -8.6291,
     "tags": ["wine", "views", "relaxed"],
     "activities": ["Douro River", "Wine cellars", "Ribeira district"],
     "image": "https://images.unsplash.com/photo-1513735492246-483525079686?auto=format&fit=crop&w=400"
@@ -147,6 +183,8 @@
     "city": "Athens",
     "country": "Greece",
     "daily_cost": 55,
+    "lat": 37.9838,
+    "lng": 23.7275,
     "tags": ["history", "culture"],
     "activities": ["Acropolis", "Parthenon", "Plaka district"],
     "image": "https://images.unsplash.com/photo-1503152394-1c6c7a3e3b59?auto=format&fit=crop&w=400"
@@ -155,6 +193,8 @@
     "city": "Thessaloniki",
     "country": "Greece",
     "daily_cost": 50,
+    "lat": 40.6401,
+    "lng": 22.9444,
     "tags": ["food", "nightlife"],
     "activities": ["White Tower", "Waterfront", "Local tavernas"],
     "image": "https://images.unsplash.com/photo-1603565816030-6b389eeb23cb?auto=format&fit=crop&w=400"
@@ -163,6 +203,8 @@
     "city": "Dubrovnik",
     "country": "Croatia",
     "daily_cost": 80,
+    "lat": 42.6507,
+    "lng": 18.0944,
     "tags": ["history", "sea", "culture"],
     "activities": ["Old Town Walls", "Lokrum Island", "Cable Car Ride"],
     "image": "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=400"
@@ -171,6 +213,8 @@
     "city": "Split",
     "country": "Croatia",
     "daily_cost": 70,
+    "lat": 43.5081,
+    "lng": 16.4402,
     "tags": ["beach", "history", "relaxed"],
     "activities": ["Diocletian's Palace", "Riva Promenade", "Marjan Hill"],
     "image": "https://images.unsplash.com/photo-1555993539-1732b0258235?auto=format&fit=crop&w=400"
@@ -179,6 +223,8 @@
     "city": "Lucerne",
     "country": "Switzerland",
     "daily_cost": 180,
+    "lat": 47.0502,
+    "lng": 8.3093,
     "tags": ["nature", "lakes", "views"],
     "activities": ["Lake Lucerne", "Chapel Bridge", "Mount Pilatus"],
     "image": "https://images.unsplash.com/photo-1527668752968-14dc70a274dd?auto=format&fit=crop&w=400"
@@ -187,6 +233,8 @@
     "city": "Copenhagen",
     "country": "Denmark",
     "daily_cost": 120,
+    "lat": 55.6761,
+    "lng": 12.5683,
     "tags": ["modern", "cycling", "culture"],
     "activities": ["Nyhavn", "Tivoli Gardens", "Little Mermaid"],
     "image": "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=400"
@@ -195,6 +243,8 @@
     "city": "Stockholm",
     "country": "Sweden",
     "daily_cost": 130,
+    "lat": 59.3293,
+    "lng": 18.0686,
     "tags": ["islands", "modern", "culture"],
     "activities": ["Gamla Stan", "Vasa Museum", "Archipelago Tour"],
     "image": "https://images.unsplash.com/photo-1509356843151-3e7d96241e11?auto=format&fit=crop&w=400"
@@ -203,6 +253,8 @@
     "city": "Oslo",
     "country": "Norway",
     "daily_cost": 140,
+    "lat": 59.9139,
+    "lng": 10.7522,
     "tags": ["nature", "modern", "fjord"],
     "activities": ["Opera House", "Vigeland Park", "Oslo Fjord"],
     "image": "https://images.unsplash.com/photo-1527766833261-b09c3163a791?auto=format&fit=crop&w=400"
@@ -211,6 +263,8 @@
     "city": "Zagreb",
     "country": "Croatia",
     "daily_cost": 60,
+    "lat": 45.815,
+    "lng": 15.9819,
     "tags": ["culture", "budget", "city"],
     "activities": ["Ban Jelačić Square", "Museum of Broken Relationships", "Zagreb Cathedral"],
     "image": "https://images.unsplash.com/photo-1555993539-1732b0258235?auto=format&fit=crop&w=400"
@@ -219,6 +273,8 @@
     "city": "Aarhus",
     "country": "Denmark",
     "daily_cost": 100,
+    "lat": 56.1518,
+    "lng": 10.2064,
     "tags": ["culture", "modern", "coastal"],
     "activities": ["ARoS Museum", "Old Town (Den Gamle By)", "Harbor Walk"],
     "image": "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=400"
@@ -227,6 +283,8 @@
     "city": "Gothenburg",
     "country": "Sweden",
     "daily_cost": 110,
+    "lat": 57.7089,
+    "lng": 11.9746,
     "tags": ["food", "coastal", "relaxed"],
     "activities": ["Liseberg Park", "Archipelago Islands", "Haga District"],
     "image": "https://images.unsplash.com/photo-1509356843151-3e7d96241e11?auto=format&fit=crop&w=400"
@@ -235,6 +293,8 @@
     "city": "Bergen",
     "country": "Norway",
     "daily_cost": 150,
+    "lat": 60.3913,
+    "lng": 5.3221,
     "tags": ["fjord", "nature", "historic"],
     "activities": ["Bryggen Wharf", "Fløibanen Funicular", "Norwegian Fjords"],
     "image": "https://images.unsplash.com/photo-1527766833261-b09c3163a791?auto=format&fit=crop&w=400"
@@ -243,6 +303,8 @@
     "city": "Zurich",
     "country": "Switzerland",
     "daily_cost": 190,
+    "lat": 47.3769,
+    "lng": 8.5417,
     "tags": ["modern", "finance", "lake"],
     "activities": ["Lake Zurich", "Old Town", "Bahnhofstrasse Shopping"],
     "image": "https://images.unsplash.com/photo-1527668752968-14dc70a274dd?auto=format&fit=crop&w=400"
@@ -251,6 +313,8 @@
     "city": "Nice",
     "country": "France",
     "daily_cost": 90,
+    "lat": 43.7102,
+    "lng": 7.262,
     "tags": ["beach", "luxury", "relaxed"],
     "activities": ["Promenade des Anglais", "Old Town Nice", "Mediterranean Beaches"],
     "image": "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=400"
@@ -259,6 +323,8 @@
     "city": "Marseille",
     "country": "France",
     "daily_cost": 75,
+    "lat": 43.2965,
+    "lng": 5.3698,
     "tags": ["port", "culture", "sea"],
     "activities": ["Old Port", "Calanques National Park", "Notre-Dame de la Garde"],
     "image": "https://images.unsplash.com/photo-1522093007474-d86e9bf7ba6f?auto=format&fit=crop&w=400"
@@ -267,6 +333,8 @@
     "city": "Venice",
     "country": "Italy",
     "daily_cost": 95,
+    "lat": 45.4408,
+    "lng": 12.3155,
     "tags": ["romantic", "canals", "culture"],
     "activities": ["Gondola Ride", "St. Mark’s Square", "Rialto Bridge"],
     "image": "https://images.unsplash.com/photo-1505842465776-3d2c3c8aebc2?auto=format&fit=crop&w=400"
@@ -275,6 +343,8 @@
     "city": "Florence",
     "country": "Italy",
     "daily_cost": 85,
+    "lat": 43.7696,
+    "lng": 11.2558,
     "tags": ["art", "history", "culture"],
     "activities": ["Duomo", "Uffizi Gallery", "Ponte Vecchio"],
     "image": "https://images.unsplash.com/photo-1526483360412-f4dbaf036963?auto=format&fit=crop&w=400"
@@ -283,6 +353,8 @@
     "city": "Seville",
     "country": "Spain",
     "daily_cost": 55,
+    "lat": 37.3891,
+    "lng": -5.9845,
     "tags": ["culture", "music", "history"],
     "activities": ["Seville Cathedral", "Alcázar Palace", "Flamenco Shows"],
     "image": "https://images.unsplash.com/photo-1543340713-8f3a5b62cfa7?auto=format&fit=crop&w=400"
@@ -291,6 +363,8 @@
     "city": "Faro",
     "country": "Portugal",
     "daily_cost": 50,
+    "lat": 37.0179,
+    "lng": -7.9307,
     "tags": ["beach", "relaxed", "nature"],
     "activities": ["Ria Formosa", "Old Town Faro", "Island Beaches"],
     "image": "https://images.unsplash.com/photo-1505761671935-60b3a7427bad?auto=format&fit=crop&w=400"
@@ -299,6 +373,8 @@
     "city": "Olomouc",
     "country": "Czech Republic",
     "daily_cost": 45,
+    "lat": 49.5938,
+    "lng": 17.2509,
     "tags": ["history", "budget", "local"],
     "activities": ["Holy Trinity Column", "Old Town Square", "Cathedral of St. Wenceslas"],
     "image": "https://images.unsplash.com/photo-1505765059034-53d0d68b89b9?auto=format&fit=crop&w=400"
@@ -307,6 +383,8 @@
     "city": "Helsinki",
     "country": "Finland",
     "daily_cost": 110,
+    "lat": 60.1699,
+    "lng": 24.9384,
     "tags": ["design", "sea", "modern"],
     "activities": ["Suomenlinna Fortress", "Market Square", "Temppeliaukio Church"],
     "image": "https://images.unsplash.com/photo-1508057198894-247b23fe5ade?auto=format&fit=crop&w=400"
@@ -315,6 +393,8 @@
     "city": "Brussels",
     "country": "Belgium",
     "daily_cost": 90,
+    "lat": 50.8503,
+    "lng": 4.3517,
     "tags": ["culture", "food", "history"],
     "activities": ["Grand Place", "Atomium", "Manneken Pis"],
     "image": "https://images.unsplash.com/photo-1528747045269-390fe33c19d5?auto=format&fit=crop&w=400"
