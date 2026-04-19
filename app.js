@@ -1,146 +1,86 @@
-/**
- * EUROTRIP PLANNER - MAIN LOGIC
- * Handles searching, filtering, and user feedback history.
- */
+let map, markers = [], selectedCities = [], exchangeRate = 1, currentCurrency = 'EUR';
 
-// --- 1. INITIALIZATION & SESSION ---
-document.addEventListener('DOMContentLoaded', () => {
-    const user = localStorage.getItem('userName') || 'Guest';
-    const display = document.getElementById('user-display');
-    const status = document.getElementById('user-info-display');
-    
-    if (display) display.innerText = user;
-    if (status) status.innerText = `Logged in as: ${user}`;
-    
-    displayTripHistory();
+// Initialize Map
+function initMap() {
+    map = L.map('map').setView([48.8, 12.3], 4);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+}
+
+// Currency API
+document.getElementById('currency-select').addEventListener('change', async (e) => {
+    currentCurrency = e.target.value;
+    if (currentCurrency !== 'EUR') {
+        const res = await fetch('https://open.er-api.com/v6/latest/EUR');
+        const data = await res.json();
+        exchangeRate = data.rates[currentCurrency];
+    } else { exchangeRate = 1; }
+    document.getElementById('search-btn').click();
 });
 
-// --- 2. SEARCH & FILTER LOGIC ---
+// Search Logic
 document.getElementById('search-btn').addEventListener('click', async () => {
-    const budget = parseFloat(document.getElementById('budget').value);
-    const days = parseInt(document.getElementById('days').value);
-    const preference = document.getElementById('preference').value;
-    const citySearch = document.getElementById('city-search').value.toLowerCase().trim();
-    const container = document.getElementById('results-container');
+    const budget = document.getElementById('budget').value;
+    const days = document.getElementById('days').value;
+    const pref = document.getElementById('preference').value;
+    
+    if(!budget || !days) return alert("Fill in fields");
 
-    // Validation
-    if (!budget || !days || budget <= 0 || days <= 0) {
-        alert("Please enter valid budget and duration values.");
-        return;
-    }
+    const res = await fetch('data.json');
+    const cities = await res.json();
+    const dailyLimit = budget / days;
 
-    container.innerHTML = "<div class='loader'>Searching destinations...</div>";
+    const filtered = cities.filter(c => 
+        c.daily_cost <= dailyLimit && (pref === 'any' || c.tags.includes(pref))
+    );
 
-    // Architecture Check: Determine if fetching from Local Server or Local File
-    const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
-    const API_URL = isLocal ? 'http://localhost:3000/api/destinations' : 'data.json';
-
-    try {
-        const response = await fetch(API_URL);
-        if (!response.ok) throw new Error("Data source unreachable");
-        
-        const allDestinations = await response.json();
-
-        // Core Algorithm: Calculate Daily Allowance
-        const dailyAllowance = budget / days;
-
-        // Filter Logic
-        const filtered = allDestinations.filter(place => {
-            const isAffordable = place.daily_cost <= dailyAllowance;
-            const matchesVibe = preference === 'any' || place.tags.includes(preference);
-
-            const matchesCity =
-            citySearch === "" ||
-            place.city.toLowerCase().includes(citySearch) ||
-            place.country.toLowerCase().includes(citySearch) ||
-            place.activities.some(activity => activity.toLowerCase().includes(citySearch)) ||
-            place.tags.some(tag => tag.toLowerCase().includes(citySearch));
-
-            return isAffordable && matchesVibe && matchesCity;
-        });
-
-        renderCityCards(filtered, container);
-    } catch (error) {
-        console.error("Fetch error:", error);
-        container.innerHTML = "<p class='error'>Unable to load data. Please ensure you are using a Live Server or check data.json.</p>";
-    }
+    render(filtered);
 });
 
-// --- 3. UI RENDERING ---
-function renderCityCards(data, container) {
+function render(data) {
+    const container = document.getElementById('results-container');
     container.innerHTML = "";
-
-    if (data.length === 0) {
-        container.innerHTML = "<p class='no-results'>No cities match your criteria. Try increasing your budget!</p>";
-        return;
-    }
-
+    markers.forEach(m => map.removeLayer(m));
+    
     data.forEach(city => {
+        const price = (city.daily_cost * exchangeRate).toFixed(0);
+        
+        // Map Marker
+        const m = L.marker([city.lat, city.lng]).addTo(map).bindPopup(`${city.city}: ${price}${currentCurrency}`);
+        markers.push(m);
+
+        // Card
         const card = document.createElement('div');
         card.className = 'city-card';
         card.innerHTML = `
-            <div class="card-img-wrapper">
-                <img src="${city.image}" alt="${city.city}" loading="lazy">
-                <span class="price-badge">€${city.daily_cost}/day</span>
-            </div>
+            <img src="${city.image}">
             <div class="card-body">
-                <h3>${city.city}, ${city.country}</h3>
-                <div class="tags">
-                    ${city.tags.map(t => `<span class="tag-pill">${t}</span>`).join('')}
-                </div>
-                <p><strong>Top Activities:</strong> ${city.activities.join(", ")}</p>
+                <label><input type="checkbox" onchange='toggleCompare(${JSON.stringify(city)})'> Compare</label>
+                <h3>${city.city}</h3>
+                <p><strong>${price} ${currentCurrency}</strong> / day</p>
             </div>
         `;
         container.appendChild(card);
     });
 }
 
-// --- 4. FEEDBACK & HISTORY LOGIC ---
-document.getElementById('feedback-form').addEventListener('submit', (e) => {
-    e.preventDefault();
+function toggleCompare(city) {
+    const idx = selectedCities.findIndex(c => c.city === city.city);
+    if(idx > -1) selectedCities.splice(idx, 1);
+    else selectedCities.push(city);
 
-    const newTrip = {
-        city: document.getElementById('visited-city').value,
-        country: document.getElementById('visited-country').value,
-        cost: document.getElementById('actual-cost').value,
-        notes: document.getElementById('trip-notes').value,
-        date: new Date().toLocaleDateString()
-    };
-
-    // Store in LocalStorage (Simulating a database)
-    let history = JSON.parse(localStorage.getItem('userTrips')) || [];
-    history.push(newTrip);
-    localStorage.setItem('userTrips', JSON.stringify(history));
-
-    e.target.reset();
-    displayTripHistory();
-    alert("Trip saved to your profile history!");
-});
-
-function displayTripHistory() {
-    const list = document.getElementById('history-list');
-    const history = JSON.parse(localStorage.getItem('userTrips')) || [];
-    
-    if (history.length === 0) {
-        list.innerHTML = "<li class='empty-msg'>No trip history yet.</li>";
-        return;
-    }
-
-    list.innerHTML = history.map(trip => `
-        <li class="history-item">
-            <div class="history-meta">
-                <strong>${trip.city}, ${trip.country}</strong>
-                <span>€${trip.cost}/day</span>
-            </div>
-            <p class="history-notes">${trip.notes}</p>
-            <span class="history-date">Visited on: ${trip.date}</span>
-        </li>
-    `).join('');
+    document.getElementById('comparison-tray').classList.toggle('hidden', selectedCities.length === 0);
+    document.getElementById('compare-count').innerText = `${selectedCities.length} Selected`;
 }
 
-// --- 5. LOGOUT FUNCTION ---
-function logout() {
-    localStorage.removeItem('isLoggedIn');
-    localStorage.removeItem('userName');
-    window.location.href = 'index.html';
-}
+document.getElementById('open-compare-btn').onclick = () => {
+    const modal = document.getElementById('compare-modal');
+    const tableDiv = document.getElementById('compare-table-container');
+    modal.classList.remove('hidden');
+
+    let html = `<table><tr><th>Feature</th>${selectedCities.map(c => `<th>${c.city}</th>`).join('')}</tr>`;
+    html += `<tr><td>Daily Cost</td>${selectedCities.map(c => `<td>${(c.daily_cost * exchangeRate).toFixed(2)} ${currentCurrency}</td>`).join('')}</tr>`;
+    html += `<tr><td>Activities</td>${selectedCities.map(c => `<td>${c.activities.join(', ')}</td>`).join('')}</tr></table>`;
+    tableDiv.innerHTML = html;
+};
+
+initMap();
