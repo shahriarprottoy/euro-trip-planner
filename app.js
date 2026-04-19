@@ -20,6 +20,7 @@ document.getElementById('search-btn').addEventListener('click', async () => {
     const budget = parseFloat(document.getElementById('budget').value);
     const days = parseInt(document.getElementById('days').value);
     const preference = document.getElementById('preference').value;
+    const citySearch = document.getElementById('city-search').value.toLowerCase().trim();
     const container = document.getElementById('results-container');
 
     // Validation
@@ -47,7 +48,15 @@ document.getElementById('search-btn').addEventListener('click', async () => {
         const filtered = allDestinations.filter(place => {
             const isAffordable = place.daily_cost <= dailyAllowance;
             const matchesVibe = preference === 'any' || place.tags.includes(preference);
-            return isAffordable && matchesVibe;
+
+            const matchesCity =
+            citySearch === "" ||
+            place.city.toLowerCase().includes(citySearch) ||
+            place.country.toLowerCase().includes(citySearch) ||
+            place.activities.some(activity => activity.toLowerCase().includes(citySearch)) ||
+            place.tags.some(tag => tag.toLowerCase().includes(citySearch));
+
+            return isAffordable && matchesVibe && matchesCity;
         });
 
         renderCityCards(filtered, container);
