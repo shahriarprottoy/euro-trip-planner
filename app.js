@@ -24,10 +24,7 @@ document.getElementById('search-btn').addEventListener('click', async () => {
     const container = document.getElementById('results-container');
 
     // Validation
-    if (!budget || !days || budget <= 0 || days <= 0) {
-        alert("Please enter valid budget and duration values.");
-        return;
-    }
+    const hasBudgetInputs = budget && days && budget > 0 && days > 0;
 
     container.innerHTML = "<div class='loader'>Searching destinations...</div>";
 
@@ -42,7 +39,7 @@ document.getElementById('search-btn').addEventListener('click', async () => {
         const allDestinations = await response.json();
 
         // Core Algorithm: Calculate Daily Allowance
-        const dailyAllowance = budget / days;
+        const dailyAllowance = hasBudgetInputs ? budget / days : Infinity;
 
         // Filter Logic
         const filtered = allDestinations.filter(place => {
