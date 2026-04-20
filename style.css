@@ -1,9 +1,16 @@
+/* --- 1. VARIABLES & RESET --- */
 :root {
     --primary: #2563eb;
     --secondary: #64748b;
     --bg: #f8fafc;
     --text: #1e293b;
     --white: #ffffff;
+    --danger: #ef4444;
+    --success: #10b981;
+}
+
+* {
+    box-sizing: border-box;
 }
 
 body {
@@ -14,88 +21,28 @@ body {
     line-height: 1.6;
 }
 
-/* Landing Page Hero */
+/* --- 2. LANDING PAGE --- */
 .landing-page {
     background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
                 url('https://images.unsplash.com/photo-1467269204594-9661b134dd2b?auto=format&fit=crop&w=1920');
     background-size: cover;
+    background-position: center;
     height: 100vh;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
 }
 
-.login-card {
-    background: var(--white);
-    padding: 2.5rem;
-    border-radius: 1rem;
-    box-shadow: 0 20px 25px -5px rgba(0,0,0,0.2);
-    text-align: center;
-    width: 100%;
-    max-width: 400px;
-}
-
-/* Planner Layout */
-.container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
-.navbar { 
-    background: var(--primary); color: white; 
-    padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center;
-}
-
-.card-panel {
-    background: white; padding: 2rem; border-radius: 12px;
-    display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.05); margin-bottom: 2rem;
-}
-
-.input-group { display: flex; flex-direction: column; gap: 0.5rem; }
-input, select, button { padding: 0.8rem; border: 1px solid #e2e8f0; border-radius: 0.5rem; }
-
-button { background: var(--primary); color: white; border: none; cursor: pointer; font-weight: 600; }
-button:hover { filter: brightness(1.1); }
-
-/* Map & Results */
-#map { height: 450px; border-radius: 12px; margin-bottom: 2rem; z-index: 1; }
-
-.results-grid {
-    display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 1.5rem; margin-bottom: 3rem;
-}
-
-.city-card { background: white; border-radius: 12px; overflow: hidden; border: 1px solid #e2e8f0; }
-.city-card img { width: 100%; height: 180px; object-fit: cover; }
-.card-body { padding: 1rem; }
-
-/* Comparison Tray & Modal */
-.comparison-tray {
-    position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%);
-    background: var(--primary); color: white; padding: 1rem 2rem;
-    border-radius: 50px; z-index: 1000; box-shadow: 0 10px 15px rgba(0,0,0,0.2);
-}
-
-.modal {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.85); z-index: 9999; display: flex; align-items: center; justify-content: center;
-}
-
-.modal-content { 
-    background: white; padding: 2rem; border-radius: 1rem; 
-    width: 90%; max-width: 1000px; max-height: 80vh; overflow-y: auto; 
-}
-
-.hidden { display: none !important; }
-
-table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
-th, td { border: 1px solid #ddd; padding: 1rem; text-align: left; }
-th { background: #f1f5f9; }
-/* Hero Styles */
 .hero-overlay {
-    background: rgba(0, 0, 0, 0.4);
+    background: rgba(0, 0, 0, 0.5);
     padding: 40px;
     border-radius: 20px;
     color: white;
-    max-width: 600px;
+    max-width: 650px;
     text-align: center;
+    margin-bottom: 2rem;
+    backdrop-filter: blur(5px);
 }
 
 .intro-message {
@@ -104,39 +51,188 @@ th { background: #f1f5f9; }
     line-height: 1.6;
 }
 
-/* Background for Planner */
+.login-card {
+    background: var(--white);
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 20px 25px -5px rgba(0,0,0,0.3);
+    text-align: center;
+    width: 90%;
+    max-width: 400px;
+}
+
+/* --- 3. PLANNER LAYOUT --- */
 .planner-bg {
-    background: linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)), 
+    background: linear-gradient(rgba(255,255,255,0.85), rgba(255,255,255,0.85)), 
                 url('https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=1600');
     background-attachment: fixed;
     background-size: cover;
 }
 
-/* Utility Buttons */
-.utility-bar {
-    display: flex;
-    gap: 15px;
-    margin-bottom: 20px;
+.navbar { 
+    background: var(--primary); 
+    color: white; 
+    padding: 1rem 2rem; 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.container { 
+    max-width: 1200px; 
+    margin: 0 auto; 
+    padding: 2rem; 
+}
+
+/* --- 4. INPUTS & PANELS --- */
+.card-panel {
+    background: white; 
+    padding: 1.5rem; 
+    border-radius: 12px;
+    display: flex; 
+    flex-wrap: wrap; 
+    gap: 1rem; 
     justify-content: center;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05); 
+    margin-bottom: 2rem;
 }
 
-.sec-btn {
-    background: #64748b;
-    color: white;
-    padding: 8px 16px;
-    border-radius: 5px;
-    border: none;
-    cursor: pointer;
+.input-group { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 0.3rem; 
 }
 
-.hidden {
-    display: none !important;
+.input-group label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--secondary);
 }
 
+input, select { 
+    padding: 0.6rem; 
+    border: 1px solid #e2e8f0; 
+    border-radius: 0.5rem; 
+    outline: none;
+}
+
+#search-btn {
+    background: var(--primary); 
+    color: white; 
+    border: none; 
+    padding: 0 2rem;
+    cursor: pointer; 
+    font-weight: 600;
+    border-radius: 0.5rem;
+    align-self: flex-end;
+    height: 42px;
+}
+
+/* --- 5. MAP & RESULTS --- */
+#map { 
+    height: 400px; 
+    border-radius: 12px; 
+    margin-bottom: 2rem; 
+    border: 1px solid #e2e8f0;
+    z-index: 1; 
+}
+
+.results-grid {
+    display: grid; 
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem; 
+    margin-bottom: 3rem;
+}
+
+.city-card { 
+    background: white; 
+    border-radius: 12px; 
+    overflow: hidden; 
+    border: 1px solid #e2e8f0; 
+    transition: transform 0.2s;
+}
+
+.city-card:hover { transform: translateY(-5px); }
+.city-card img { width: 100%; height: 180px; object-fit: cover; }
+.card-body { padding: 1rem; }
+
+/* --- 6. FEEDBACK SECTION --- */
 .feedback-panel {
     background: white;
-    padding: 20px;
+    padding: 2rem;
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    margin-top: 30px;
+    margin-top: 3rem;
+}
+
+.history-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 1rem;
+}
+
+.history-list li {
+    background: #f1f5f9;
+    padding: 10px;
+    margin-bottom: 8px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    border-left: 4px solid var(--primary);
+}
+
+/* --- 7. COMPARISON & MODALS --- */
+.comparison-tray {
+    position: fixed; 
+    bottom: 2rem; 
+    left: 50%; 
+    transform: translateX(-50%);
+    background: var(--primary); 
+    color: white; 
+    padding: 0.8rem 2rem;
+    border-radius: 50px; 
+    z-index: 1000; 
+    box-shadow: 0 10px 15px rgba(0,0,0,0.2);
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+#open-compare-btn {
+    background: white;
+    color: var(--primary);
+    border: none;
+    padding: 5px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.modal {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.8); z-index: 9999; display: flex; align-items: center; justify-content: center;
+}
+
+.modal-content { 
+    background: white; padding: 2rem; border-radius: 1rem; 
+    width: 90%; max-width: 600px; max-height: 80vh; overflow-y: auto; 
+}
+
+table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+th, td { border: 1px solid #ddd; padding: 0.8rem; text-align: left; }
+th { background: #f1f5f9; }
+
+/* --- 8. UTILITIES --- */
+.hidden { display: none !important; }
+
+.submit-btn {
+    background: var(--success);
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
 }
