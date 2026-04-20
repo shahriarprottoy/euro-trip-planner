@@ -160,6 +160,15 @@ function displayHistory() {
         list.appendChild(li);
     });
 }
+function toggleSection(sectionId) {
+    const section = document.getElementById(sectionId);
+    section.classList.toggle('hidden');
+    
+    // Refresh map size if opening map
+    if (sectionId === 'map-wrapper' && !section.classList.contains('hidden')) {
+        setTimeout(() => { map.invalidateSize(); }, 200);
+    }
+}
 
 // START EVERYTHING
 window.onload = () => {
