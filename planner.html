@@ -38,25 +38,25 @@
         </section>
 
         <div class="utility-bar">
-            <button onclick="toggleSection('map-wrapper')" class="sec-btn">📍 Show/Hide Map</button>
-            <button onclick="toggleSection('feedback-section')" class="sec-btn">💬 Share Your Experience</button>
+            <button id="toggle-map-btn" class="sec-btn">📍 Show/Hide Map</button>
+            <button id="toggle-feedback-btn" class="sec-btn">💬 Share Your Experience</button>
         </div>
 
-        <div id="map-wrapper" class="hidden">
-            <div id="map"></div>
+        <div id="map-wrapper" class="hidden" style="margin-bottom: 20px;">
+            <div id="map" style="height: 400px; border-radius: 12px;"></div>
         </div>
 
         <div id="results-container" class="results-grid"></div>
 
         <section id="feedback-section" class="hidden feedback-panel">
-            <h3>Help Us Grow</h3>
-            <p>Tell us about your trip to help other travelers!</p>
+            <h3>Share Your Experiences to Help Us Grow</h3>
             <form id="feedback-form">
-                <div class="form-grid">
-                    <input type="text" id="visited-city" placeholder="City" required>
-                    <input type="number" id="actual-cost" placeholder="Daily Cost" required>
+                <div style="display: flex; gap: 10px; margin-bottom: 10px;">
+                    <input type="text" id="visited-city" placeholder="City" style="flex:1" required>
+                    <input type="text" id="visited-country" placeholder="Country" style="flex:1" required>
                 </div>
-                <button type="submit" class="submit-btn">Save Experience</button>
+                <input type="number" id="actual-cost" placeholder="Daily Cost Spent" style="width:100%; margin-bottom:10px;" required>
+                <button type="submit" class="primary-btn" style="width:100%">Save Trip</button>
             </form>
             <ul id="history-list" class="history-list"></ul>
         </section>
