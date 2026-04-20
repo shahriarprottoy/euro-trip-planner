@@ -2,100 +2,29 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>EuroTrip | Planner</title>
+    <title>EuroTrip | Welcome</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 </head>
-<body class="planner-bg">
-    <nav class="navbar">
-        <div class="nav-brand">🌍 <strong>EuroTrip</strong></div>
-        <div class="nav-user">
-            <span id="user-display"></span>
-            <button onclick="logout()" class="logout-link">Logout</button>
+<body class="landing-page">
+    <div class="hero-overlay">
+        <div class="welcome-text">
+            <h1>🌍 EuroTrip Planner</h1>
+            <p class="intro-message">
+                Have limited budget but don't know where to plan your next Europe trip? 
+                We provide guidance on Europe trips based on your budget and choice. 
+                <strong>Welcome to our service.</strong>
+            </p>
         </div>
-    </nav>
 
-    <div class="app-layout">
-        <aside class="sidebar">
-            <h3>Trending Now</h3>
-            <div class="sidebar-item">
-                <img src="https://images.unsplash.com/photo-1513735492246-483525079686?auto=format&fit=crop&w=150" alt="Porto">
-                <p>Porto, Portugal</p>
-            </div>
-            <div class="sidebar-item">
-                <img src="https://images.unsplash.com/photo-1551840231-b5ef0e840450?auto=format&fit=crop&w=150" alt="Budapest">
-                <p>Budapest, Hungary</p>
-            </div>
-            <div class="sidebar-item">
-                <img src="https://images.unsplash.com/photo-1505765059034-53d0d68b89b9?auto=format&fit=crop&w=150" alt="Prague">
-                <p>Prague, Czechia</p>
-            </div>
-            <div class="sidebar-promo">
-                <h4>Pro Tip:</h4>
-                <p>Travel in October for 30% lower prices!</p>
-            </div>
-        </aside>
-
-        <main class="container">
-            <section class="card-panel">
-                <div class="input-group">
-                    <label>Budget</label>
-                    <input type="number" id="budget" placeholder="Amount">
-                </div>
-                <div class="input-group">
-                    <label>Days</label>
-                    <input type="number" id="days" placeholder="Days">
-                </div>
-                <div class="input-group">
-                    <label>Currency</label>
-                    <select id="currency-select">
-                        <option value="EUR">EUR (€)</option>
-                        <option value="USD">USD ($)</option>
-                        <option value="GBP">GBP (£)</option>
-                    </select>
-                </div>
-                <div class="input-group">
-                    <label>Vibe</label>
-                    <select id="preference">
-                        <option value="any">All Vibes</option>
-                        <option value="history">History</option>
-                        <option value="nightlife">Nightlife</option>
-                        <option value="nature">Nature</option>
-                        <option value="food">Food</option>
-                    </select>
-                </div>
-                <button id="search-btn">Find Destinations</button>
-            </section>
-
-            <div class="utility-bar">
-                <button id="toggle-map-btn" class="sec-btn">📍 Toggle Map</button>
-                <button id="toggle-feedback-btn" class="sec-btn">💬 Share Experience</button>
-            </div>
-
-            <div id="map-wrapper" class="hidden">
-                <div id="map"></div>
-            </div>
-
-            <div id="results-container" class="results-grid">
-                </div>
-
-            <section id="feedback-section" class="hidden feedback-panel">
-                <h3>Share Your Experiences to Help Us Grow</h3>
-                <form id="feedback-form">
-                    <div class="form-grid">
-                        <input type="text" id="visited-city" placeholder="City" required>
-                        <input type="text" id="visited-country" placeholder="Country" required>
-                    </div>
-                    <input type="number" id="actual-cost" placeholder="Daily Cost Spent" required>
-                    <button type="submit" class="primary-btn">Save Trip</button>
-                </form>
-                <ul id="history-list" class="history-list"></ul>
-            </section>
-        </main>
+        <div class="login-card">
+            <h3>Member Login</h3>
+            <form id="login-form">
+                <input type="text" id="username" placeholder="Username" required>
+                <input type="password" id="password" placeholder="Password" required>
+                <button type="submit" class="primary-btn">Start Planning</button>
+            </form>
+        </div>
     </div>
-
     <script src="auth.js"></script>
-    <script src="app.js"></script>
 </body>
 </html>
