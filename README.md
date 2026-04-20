@@ -63,9 +63,7 @@ Comparison Modal: A dynamic table that pulls data from selected checkboxes for c
 📝 Installation
 Clone the repository:
 
-Bash
-git clone https://github.com/yourusername/eurotrip-planner.git
-Open index.html in any modern web browser.
+
 
 Note: For the Currency API to work without CORS issues, it is recommended to run the project via a local server (e.g., Live Server extension in VS Code).
 
