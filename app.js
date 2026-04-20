@@ -1,73 +1,137 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>EuroTrip | Planner</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-</head>
-<body class="planner-bg">
-    <nav class="navbar">
-        <div class="nav-brand"><strong>EuroTrip</strong></div>
-        <div class="nav-user">
-            <span id="user-display"></span>
-            <button onclick="logout()" class="logout-link">Logout</button>
-        </div>
-    </nav>
+let map, markers = [], selectedCities = [], exchangeRate = 1, currentCurrency = 'EUR';
 
-    <div class="container">
-        <section class="card-panel">
-            <div class="input-group">
-                <label>Budget</label>
-                <input type="number" id="budget" placeholder="e.g. 1000">
+// --- 1. CORE INITIALIZATION ---
+document.addEventListener('DOMContentLoaded', () => {
+    console.log("App Loaded");
+    
+    // Initialize Map (but it's hidden in CSS)
+    initMap();
+    
+    // Check Login Status
+    const user = localStorage.getItem('userName');
+    if (document.getElementById('user-display')) {
+        document.getElementById('user-display').innerText = user || "Guest";
+    }
+
+    // Attach Toggle Listeners
+    setupToggles();
+    
+    // Load History
+    displayHistory();
+});
+
+// --- 2. TOGGLE LOGIC ---
+function setupToggles() {
+    const mapBtn = document.getElementById('toggle-map-btn');
+    const feedBtn = document.getElementById('toggle-feedback-btn');
+
+    if (mapBtn) {
+        mapBtn.addEventListener('click', () => {
+            const wrapper = document.getElementById('map-wrapper');
+            wrapper.classList.toggle('hidden');
+            // Leaflet fix: Map needs to recalculate size when unhidden
+            if (!wrapper.classList.contains('hidden')) {
+                setTimeout(() => { map.invalidateSize(); }, 200);
+            }
+        });
+    }
+
+    if (feedBtn) {
+        feedBtn.addEventListener('click', () => {
+            document.getElementById('feedback-section').classList.toggle('hidden');
+        });
+    }
+}
+
+// --- 3. MAP & CURRENCY ---
+function initMap() {
+    if (!map) {
+        map = L.map('map').setView([48.8, 12.3], 4);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+    }
+}
+
+document.getElementById('currency-select').addEventListener('change', async (e) => {
+    currentCurrency = e.target.value;
+    if (currentCurrency !== 'EUR') {
+        const res = await fetch('https://open.er-api.com/v6/latest/EUR');
+        const data = await res.json();
+        exchangeRate = data.rates[currentCurrency];
+    } else {
+        exchangeRate = 1;
+    }
+    if (document.getElementById('budget').value) performSearch();
+});
+
+// --- 4. SEARCH & RENDER ---
+document.getElementById('search-btn').addEventListener('click', performSearch);
+
+async function performSearch() {
+    const budget = document.getElementById('budget').value;
+    const days = document.getElementById('days').value;
+    const container = document.getElementById('results-container');
+
+    if (!budget || !days) return alert("Please enter budget and days.");
+
+    try {
+        const res = await fetch('data.json');
+        const cities = await res.json();
+        const dailyLimitEur = (budget / days) / exchangeRate;
+
+        const filtered = cities.filter(c => c.daily_cost <= dailyLimitEur);
+        render(filtered, container);
+    } catch (err) {
+        console.error("Search Error:", err);
+    }
+}
+
+function render(data, container) {
+    container.innerHTML = "";
+    markers.forEach(m => map.removeLayer(m));
+    markers = [];
+
+    const symbol = currentCurrency === 'USD' ? '$' : currentCurrency === 'GBP' ? '£' : '€';
+
+    data.forEach(city => {
+        const price = (city.daily_cost * exchangeRate).toFixed(0);
+        
+        // Marker
+        const m = L.marker([city.lat, city.lng]).addTo(map).bindPopup(`${city.city}: ${symbol}${price}`);
+        markers.push(m);
+
+        // Card
+        const card = document.createElement('div');
+        card.className = 'city-card';
+        card.innerHTML = `
+            <img src="${city.image}">
+            <div class="card-body">
+                <h3>${city.city}</h3>
+                <p><strong>${symbol}${price}</strong> / day</p>
             </div>
-            <div class="input-group">
-                <label>Days</label>
-                <input type="number" id="days" placeholder="e.g. 7">
-            </div>
-            <div class="input-group">
-                <label>Currency</label>
-                <select id="currency-select">
-                    <option value="EUR">EUR (€)</option>
-                    <option value="USD">USD ($)</option>
-                    <option value="GBP">GBP (£)</option>
-                </select>
-            </div>
-            <button id="search-btn">Find Destinations</button>
-        </section>
+        `;
+        container.appendChild(card);
+    });
+}
 
-        <div class="utility-bar">
-            <button id="toggle-map-btn" class="sec-btn">📍 Show/Hide Map</button>
-            <button id="toggle-feedback-btn" class="sec-btn">💬 Share Your Experience</button>
-        </div>
+// --- 5. FEEDBACK LOGIC ---
+document.getElementById('feedback-form').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const trip = {
+        city: document.getElementById('visited-city').value,
+        country: document.getElementById('visited-country').value,
+        cost: document.getElementById('actual-cost').value,
+        date: new Date().toLocaleDateString()
+    };
+    let history = JSON.parse(localStorage.getItem('userTrips')) || [];
+    history.push(trip);
+    localStorage.setItem('userTrips', JSON.stringify(history));
+    e.target.reset();
+    displayHistory();
+});
 
-        <div id="map-wrapper" class="hidden" style="margin-bottom: 20px;">
-            <div id="map" style="height: 400px; border-radius: 12px;"></div>
-        </div>
-
-        <div id="results-container" class="results-grid"></div>
-
-        <section id="feedback-section" class="hidden feedback-panel">
-            <h3>Share Your Experiences to Help Us Grow</h3>
-            <form id="feedback-form">
-                <div style="display: flex; gap: 10px; margin-bottom: 10px;">
-                    <input type="text" id="visited-city" placeholder="City" style="flex:1" required>
-                    <input type="text" id="visited-country" placeholder="Country" style="flex:1" required>
-                </div>
-                <input type="number" id="actual-cost" placeholder="Daily Cost Spent" style="width:100%; margin-bottom:10px;" required>
-                <button type="submit" class="primary-btn" style="width:100%">Save Trip</button>
-            </form>
-            <ul id="history-list" class="history-list"></ul>
-        </section>
-    </div>
-
-    <div id="comparison-tray" class="comparison-tray hidden">
-        <span id="compare-count">0 selected</span>
-        <button id="open-compare-btn">Compare Now</button>
-    </div>
-
-    <script src="auth.js"></script>
-    <script src="app.js"></script>
-</body>
-</html>
+function displayHistory() {
+    const list = document.getElementById('history-list');
+    if (!list) return;
+    const history = JSON.parse(localStorage.getItem('userTrips')) || [];
+    list.innerHTML = history.map(t => `<li>${t.city} - ${t.cost} (${t.date})</li>`).join('');
+}
