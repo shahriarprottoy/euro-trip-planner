@@ -4,19 +4,19 @@ let map, markers = [], selectedCities = [], exchangeRate = 1, currentCurrency = 
 document.addEventListener('DOMContentLoaded', () => {
     console.log("App Loaded");
     
-    // Initialize Map
+    // Initialize Map (but it's hidden in CSS)
     initMap();
     
     // Check Login Status
     const user = localStorage.getItem('userName');
     if (document.getElementById('user-display')) {
-        document.getElementById('user-display').innerText = user || "Traveler";
+        document.getElementById('user-display').innerText = user || "Guest";
     }
 
-    // Attach Toggle Listeners for Map and Feedback
+    // Attach Toggle Listeners
     setupToggles();
     
-    // Load History from LocalStorage
+    // Load History
     displayHistory();
 });
 
@@ -46,97 +46,67 @@ function setupToggles() {
 // --- 3. MAP & CURRENCY ---
 function initMap() {
     if (!map) {
-        const mapContainer = document.getElementById('map');
-        if (mapContainer) {
-            map = L.map('map').setView([48.8, 12.3], 4);
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '© OpenStreetMap'
-            }).addTo(map);
-        }
+        map = L.map('map').setView([48.8, 12.3], 4);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
     }
 }
 
 document.getElementById('currency-select').addEventListener('change', async (e) => {
     currentCurrency = e.target.value;
-    try {
-        if (currentCurrency !== 'EUR') {
-            const res = await fetch('https://open.er-api.com/v6/latest/EUR');
-            const data = await res.json();
-            exchangeRate = data.rates[currentCurrency];
-        } else {
-            exchangeRate = 1;
-        }
-        // Auto-refresh search if user has already entered data
-        if (document.getElementById('budget').value) performSearch();
-    } catch (err) {
-        console.error("Currency conversion failed", err);
+    if (currentCurrency !== 'EUR') {
+        const res = await fetch('https://open.er-api.com/v6/latest/EUR');
+        const data = await res.json();
+        exchangeRate = data.rates[currentCurrency];
+    } else {
+        exchangeRate = 1;
     }
+    if (document.getElementById('budget').value) performSearch();
 });
 
-// --- 4. SEARCH & RENDER (Now with Vibe Filter) ---
+// --- 4. SEARCH & RENDER ---
 document.getElementById('search-btn').addEventListener('click', performSearch);
 
 async function performSearch() {
     const budget = document.getElementById('budget').value;
     const days = document.getElementById('days').value;
-    const preference = document.getElementById('preference').value; // Restored Vibe
     const container = document.getElementById('results-container');
 
-    if (!budget || !days) return alert("Please enter both budget and number of days.");
+    if (!budget || !days) return alert("Please enter budget and days.");
 
     try {
         const res = await fetch('data.json');
         const cities = await res.json();
-        
-        // Convert user daily budget to EUR to compare with database
         const dailyLimitEur = (budget / days) / exchangeRate;
 
-        // Filter by BOTH Cost and Vibe (Tag)
-        const filtered = cities.filter(city => {
-            const matchesCost = city.daily_cost <= dailyLimitEur;
-            const matchesVibe = (preference === 'any' || city.tags.includes(preference));
-            return matchesCost && matchesVibe;
-        });
-
+        const filtered = cities.filter(c => c.daily_cost <= dailyLimitEur);
         render(filtered, container);
     } catch (err) {
         console.error("Search Error:", err);
-        container.innerHTML = "<p>Error loading destinations. Please try again.</p>";
     }
 }
 
 function render(data, container) {
     container.innerHTML = "";
-    
-    // Clear old markers
     markers.forEach(m => map.removeLayer(m));
     markers = [];
-
-    if (data.length === 0) {
-        container.innerHTML = "<p class='no-results'>No destinations match your budget and choice. Try adjusting your vibe or budget!</p>";
-        return;
-    }
 
     const symbol = currentCurrency === 'USD' ? '$' : currentCurrency === 'GBP' ? '£' : '€';
 
     data.forEach(city => {
         const price = (city.daily_cost * exchangeRate).toFixed(0);
         
-        // Map Marker
-        const m = L.marker([city.lat, city.lng]).addTo(map)
-                  .bindPopup(`<b>${city.city}</b><br>${symbol}${price} per day`);
+        // Marker
+        const m = L.marker([city.lat, city.lng]).addTo(map).bindPopup(`${city.city}: ${symbol}${price}`);
         markers.push(m);
 
-        // Result Card
+        // Card
         const card = document.createElement('div');
         card.className = 'city-card';
         card.innerHTML = `
-            <img src="${city.image}" alt="${city.city}">
+            <img src="${city.image}">
             <div class="card-body">
-                <h3>${city.city}, ${city.country}</h3>
-                <p class="vibe-tags">${city.tags.map(t => `#${t}`).join(' ')}</p>
+                <h3>${city.city}</h3>
                 <p><strong>${symbol}${price}</strong> / day</p>
-                <p class="activities-text"><small>${city.activities.join(' • ')}</small></p>
             </div>
         `;
         container.appendChild(card);
@@ -144,97 +114,24 @@ function render(data, container) {
 }
 
 // --- 5. FEEDBACK LOGIC ---
-const feedbackForm = document.getElementById('feedback-form');
-if (feedbackForm) {
-    feedbackForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        
-        const trip = {
-            city: document.getElementById('visited-city').value,
-            country: document.getElementById('visited-country').value,
-            cost: document.getElementById('actual-cost').value,
-            currency: currentCurrency,
-            date: new Date().toLocaleDateString()
-        };
+document.getElementById('feedback-form').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const trip = {
+        city: document.getElementById('visited-city').value,
+        country: document.getElementById('visited-country').value,
+        cost: document.getElementById('actual-cost').value,
+        date: new Date().toLocaleDateString()
+    };
+    let history = JSON.parse(localStorage.getItem('userTrips')) || [];
+    history.push(trip);
+    localStorage.setItem('userTrips', JSON.stringify(history));
+    e.target.reset();
+    displayHistory();
+});
 
-        // Save to History
-        let history = JSON.parse(localStorage.getItem('userTrips')) || [];
-        history.unshift(trip); // Add to beginning of array
-        localStorage.setItem('userTrips', JSON.stringify(history));
-        
-        // Reset and Update UI
-        e.target.reset();
-        alert("Thanks for sharing! Your experience helps our community grow.");
-        displayHistory();
-    });
-}
-/* Layout Management */
-.app-layout {
-    display: flex;
-    min-height: calc(100vh - 70px);
-}
-
-.sidebar {
-    width: 250px;
-    background: white;
-    padding: 20px;
-    border-right: 1px solid #e2e8f0;
-    box-shadow: 2px 0 5px rgba(0,0,0,0.05);
-}
-
-.sidebar h3 { margin-top: 0; color: var(--primary); }
-
-.sidebar-item {
-    margin-bottom: 20px;
-    text-align: center;
-    font-size: 0.9rem;
-}
-
-.sidebar-item img {
-    width: 100%;
-    height: 100px;
-    object-fit: cover;
-    border-radius: 8px;
-    margin-bottom: 5px;
-}
-
-.sidebar-promo {
-    background: #f1f5f9;
-    padding: 15px;
-    border-radius: 10px;
-    margin-top: 30px;
-    font-size: 0.85rem;
-}
-
-.container {
-    flex: 1;
-    padding: 2rem;
-}
-
-/* Fix for form grid */
-.form-grid {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 10px;
-}
-
-/* Ensure navbar is on top */
-.navbar { z-index: 1001; position: sticky; top: 0; }
 function displayHistory() {
     const list = document.getElementById('history-list');
     if (!list) return;
-    
     const history = JSON.parse(localStorage.getItem('userTrips')) || [];
-    
-    if (history.length === 0) {
-        list.innerHTML = "<li>No trips shared yet.</li>";
-        return;
-    }
-
-    list.innerHTML = history.map(t => `
-        <li class="history-item">
-            <strong>${t.city}</strong> (${t.date})<br>
-            Spent approx ${t.cost} ${t.currency} per day
-        </li>
-    `).join('');
+    list.innerHTML = history.map(t => `<li>${t.city} - ${t.cost} (${t.date})</li>`).join('');
 }
