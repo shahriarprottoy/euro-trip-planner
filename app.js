@@ -168,7 +168,58 @@ if (feedbackForm) {
         displayHistory();
     });
 }
+/* Layout Management */
+.app-layout {
+    display: flex;
+    min-height: calc(100vh - 70px);
+}
 
+.sidebar {
+    width: 250px;
+    background: white;
+    padding: 20px;
+    border-right: 1px solid #e2e8f0;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.05);
+}
+
+.sidebar h3 { margin-top: 0; color: var(--primary); }
+
+.sidebar-item {
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+.sidebar-item img {
+    width: 100%;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 5px;
+}
+
+.sidebar-promo {
+    background: #f1f5f9;
+    padding: 15px;
+    border-radius: 10px;
+    margin-top: 30px;
+    font-size: 0.85rem;
+}
+
+.container {
+    flex: 1;
+    padding: 2rem;
+}
+
+/* Fix for form grid */
+.form-grid {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+/* Ensure navbar is on top */
+.navbar { z-index: 1001; position: sticky; top: 0; }
 function displayHistory() {
     const list = document.getElementById('history-list');
     if (!list) return;
